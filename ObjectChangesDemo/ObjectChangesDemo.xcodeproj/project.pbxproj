@@ -93,6 +93,7 @@
 		C99A584A231BA5A900637707 /* ObjectChanges */ = {
 			isa = PBXGroup;
 			children = (
+				C99A585D231C108100637707 /* ObjectChanges.h */,
 				C99A584E231BA61E00637707 /* NSObject+OCPropertySetter.h */,
 				C99A584F231BA61E00637707 /* NSObject+OCPropertySetter.m */,
 				C99A5857231BAD6E00637707 /* NSObject+ClassSwizzle.h */,
@@ -101,7 +102,6 @@
 				C99A5852231BA95800637707 /* NSObject+ChangesAction.m */,
 				C99A5854231BAB1E00637707 /* ChangeAction.h */,
 				C99A5855231BAB1E00637707 /* ChangeAction.m */,
-				C99A585D231C108100637707 /* ObjectChanges.h */,
 			);
 			path = ObjectChanges;
 			sourceTree = "<group>";
