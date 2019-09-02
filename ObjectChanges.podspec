@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name         = "ObjectChanges"
-  s.version      = "1.0.2"
+  s.version      = "1.0.3"
   s.summary      = "A project that listens for changes in all properties of an object."
   s.homepage     = "https://github.com/GodL/ObjectChanges"
-  s.frameworks = 'Foundation'
+  s.frameworks = "Foundation"
   s.license      = "MIT"
   s.author             = { "GodL" => "547188371@qq.com" }
   s.platform     = :ios, "8.0"

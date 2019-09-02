@@ -7,7 +7,7 @@
 //
 
 #import "NSObject+OCPropertySetter.h"
-@import ObjectiveC.runtime;
+#import <objc/runtime.h>
 
 @implementation NSObject (OCPropertySetter)
 

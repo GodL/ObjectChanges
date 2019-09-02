@@ -8,8 +8,7 @@
 
 #import "NSObject+ChangesAction.h"
 #import "NSObject+ClassSwizzle.h"
-@import ObjectiveC.runtime;
-
+#import <objc/runtime.h>
 @implementation NSObject (ChangesAction)
 
 - (NSMutableSet<ChangeAction *> *)oc_changeActions {

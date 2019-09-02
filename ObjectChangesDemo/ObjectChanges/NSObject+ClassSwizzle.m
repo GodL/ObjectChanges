@@ -10,8 +10,8 @@
 #import "NSObject+ChangesAction.h"
 #import "NSObject+OCPropertySetter.h"
 #import "ChangeAction.h"
-@import ObjectiveC.runtime;
-@import ObjectiveC.message;
+#import <objc/runtime.h>
+#import <objc/message.h>
 
 static NSString * const OCForSelectorAliasPrefix = @"oc_alias_";
 static NSString * const OCSubclassSuffix = @"_OCChangesSub";
