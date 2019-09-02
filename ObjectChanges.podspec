@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ObjectChanges"
-  s.version      = "1.0.5"
+  s.version      = "1.0.6"
   s.summary      = "A project that listens for changes in all properties of an object."
   s.homepage     = "https://github.com/GodL/ObjectChanges"
   s.framework = "Foundation"

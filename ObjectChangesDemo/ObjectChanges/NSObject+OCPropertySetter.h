@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (OCPropertySetter)
 
-@property (nonatomic,copy,readonly,class) NSDictionary<NSString *,NSString *> *oc_allSetterNames;
+@property (nonatomic,copy,readonly) NSArray<NSString *> *oc_properties;
 
 @end
 

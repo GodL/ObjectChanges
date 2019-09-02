@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "ChangeDemo.h"
 #import "ObjectChanges.h"
+@import ObjectiveC.runtime;
 
 @interface ViewController ()
 
@@ -21,9 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _demo = [ChangeDemo new];
-    
     [_demo oc_swizzleAllProperties];
-    
+   
     ChangeAction *action1 = [ChangeAction new];
     action1.callback = ^(ChangeAction * _Nonnull action, NSString * _Nonnull invokeProperty) {
         NSLog(@"action1 = %@ property = %@",action,invokeProperty);
@@ -40,12 +40,17 @@
     [_demo oc_addChangeAction:action1];
     [_demo oc_addChangeAction:action2];
     
+    [_demo addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+   
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _demo.name = @"adadad";
         _demo.age = 11;
+        
     });
     // Do any additional setup after loading the view, typically from a nib.
 }
 
-
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    
+}
 @end

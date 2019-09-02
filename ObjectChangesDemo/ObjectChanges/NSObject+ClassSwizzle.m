@@ -41,9 +41,13 @@ static BOOL OCForwardInvocation(NSObject *self,NSInvocation *invocation) {
         invocation.selector = aliasSelector;
         [invocation invoke];
     }
-    NSDictionary *properties = [[self class] oc_allSetterNames];
-    NSString *propertyName = properties[setterName];
-    if (propertyName == nil) return NO;
+    if (setterName.length < 5) return responseToAlias;
+    NSString *prefix = [setterName substringWithRange:NSMakeRange(3, 1)].lowercaseString;
+    NSString *propertyName = [prefix stringByAppendingString:[setterName substringWithRange:NSMakeRange(4, setterName.length - 5)]];
+    if (![self respondsToSelector:NSSelectorFromString(propertyName)]) {
+        prefix = [setterName substringWithRange:NSMakeRange(3, 1)];
+        propertyName = [prefix stringByAppendingString:[setterName substringWithRange:NSMakeRange(4, setterName.length - 5)]];
+    }
     NSMutableSet<ChangeAction *> *changeActions = self.oc_changeActions;
     [changeActions enumerateObjectsUsingBlock:^(ChangeAction * _Nonnull obj, BOOL * _Nonnull stop) {
         if (![obj.ingoreProperties containsObject:propertyName]) {
@@ -126,7 +130,7 @@ static void OCSelectorSwizzleToMsgForward(Class cls,SEL selector) {
 }
 
 - (void)oc_swizzleAllProperties {
-    [self oc_swizzleWithProperties:[self.class oc_allSetterNames].allValues];
+    [self oc_swizzleWithProperties:self.oc_properties];
 }
 
 - (void)oc_swizzleWithProperties:(NSArray<NSString *> *)properties {

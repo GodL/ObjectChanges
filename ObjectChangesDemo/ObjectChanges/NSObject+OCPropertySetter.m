@@ -11,22 +11,21 @@
 
 @implementation NSObject (OCPropertySetter)
 
-+ (NSDictionary<NSString *,NSString *> *)oc_allSetterNames {
-    NSMutableDictionary *names = objc_getAssociatedObject(self, _cmd);
-    if (!names) {
-        names = [NSMutableDictionary dictionary];
+- (NSArray<NSString *> *)oc_properties {
+    NSMutableArray *properties = objc_getAssociatedObject(self, _cmd);
+    if (!properties) {
+        properties = NSMutableArray.array;
         unsigned int count = 0;
-        objc_property_t *properties = class_copyPropertyList(self, &count);
+        objc_property_t *property_t = class_copyPropertyList([self class], &count);
         for (int i=0; i<count; i++) {
-            objc_property_t property = properties[i];
+            objc_property_t property = property_t[i];
             NSString *propertyName = [NSString stringWithUTF8String:property_getName(property)];
-            NSString *setterName = [NSString stringWithFormat:@"set%@%@:",[[propertyName substringToIndex:1] uppercaseString],[propertyName substringFromIndex:1]];
-            if (propertyName && setterName) names[setterName] = propertyName;
+            if (propertyName) [properties addObject:propertyName];
         }
-        free(properties);
-        objc_setAssociatedObject(names, _cmd, names, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        free(property_t);
+        objc_setAssociatedObject(self, _cmd, properties, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
-    return (NSDictionary *)names;
+    return [properties copy];
 }
 
 @end
