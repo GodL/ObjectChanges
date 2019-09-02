@@ -11,7 +11,7 @@
 
 #import "NSObject+OCPropertySetter.h"
 #import "NSObject+ClassSwizzle.h"
-#import "NSObject+OCPropertySetter.h"
 #import "NSObject+ChangesAction.h"
 #import "ChangeAction.h"
+
 #endif /* ObjectChanges_h */
